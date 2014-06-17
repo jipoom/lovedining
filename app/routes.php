@@ -31,19 +31,25 @@ Route::post('user/login', array('as' => 'user/login', 'uses' => 'UserController@
  
 Route::get('user/profile', array('as' => 'user/profile', 'uses' => 'UserController@profileAction'));  
 
+//Route for user registeration
 Route::get('register', function()
 {
 	return View::make('user/register');
 }); 
 
+//Route for inserting user to DB
 Route::post('user/create', array('as' => 'user/create', 'uses' => 'UserController@createAction'));    
 
+//Route for user activation
 Route::get('user/activate/{key}/{username}', array('as' => 'user/activate' , 'uses' => 'UserController@activateAction'));
 
 Route::get('user/logout', array('as' => 'user/logout', 'uses' => 'UserController@logoutAction'));  
 
+//Route for facebook login
 Route::get('user/fb', array('as' => 'user/fb', 'uses' => 'UserController@fbLoginACtion'));  
 
+//Share via twitter
 Route::get('share/tw', array('as' => 'restaurant/tw', 'uses' => 'ShareController@twitterAction')); 
 
+//Share via facebook
 Route::get('share/fb', array('as' => 'restaurant/fb', 'uses' => 'ShareController@facebookAction')); 
