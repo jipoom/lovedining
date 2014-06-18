@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 17, 2014 at 07:02 PM
+-- Generation Time: Jun 18, 2014 at 06:37 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -40,6 +40,23 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comment`
+--
+
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `review_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(55) NOT NULL,
+  `content` text NOT NULL,
+  `rating` int(11) NOT NULL,
+  `date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -67,42 +84,10 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 
 CREATE TABLE IF NOT EXISTS `picture` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `restaurant_id` int(11) NOT NULL,
-  `picture` blob NOT NULL,
+  `review_id` int(11) NOT NULL,
+  `picture` varchar(255) NOT NULL,
+  `caption` text,
   `date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `restaurant`
---
-
-CREATE TABLE IF NOT EXISTS `restaurant` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `type` varchar(32) NOT NULL,
-  `hrs_operation` time DEFAULT NULL,
-  `tel` varchar(32) NOT NULL,
-  `price_range` tinyint(4) DEFAULT NULL,
-  `take_reservation` tinyint(4) DEFAULT NULL,
-  `delivery` tinyint(4) DEFAULT NULL,
-  `take_out` tinyint(4) DEFAULT NULL,
-  `parking` tinyint(4) DEFAULT NULL,
-  `wifi` tinyint(4) DEFAULT NULL,
-  `tv` tinyint(4) DEFAULT NULL,
-  `alcohol` tinyint(4) DEFAULT NULL,
-  `description` tinyint(4) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `menu_url` varchar(255) DEFAULT NULL,
-  `sub_district` varchar(45) DEFAULT NULL,
-  `district` varchar(45) DEFAULT NULL,
-  `province` varchar(45) DEFAULT NULL,
-  `zip_code` varchar(8) DEFAULT NULL,
-  `country` varchar(32) DEFAULT NULL,
-  `date_added` datetime DEFAULT CURRENT_TIMESTAMP,
-  `date_last_modified` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -114,13 +99,39 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
 
 CREATE TABLE IF NOT EXISTS `review` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `restaurant_id` int(11) NOT NULL,
-  `title` varchar(55) NOT NULL,
+  `review_title` text NOT NULL,
+  `restaurant_name` varchar(255) NOT NULL,
+  `type` varchar(32) NOT NULL,
+  `hrs_operation` time DEFAULT NULL,
+  `tel` varchar(32) NOT NULL,
+  `price_range` tinyint(4) DEFAULT NULL,
+  `take_reservation` tinyint(4) DEFAULT NULL,
+  `delivery` tinyint(4) DEFAULT NULL,
+  `take_out` tinyint(4) DEFAULT NULL,
+  `parking` tinyint(4) DEFAULT NULL,
+  `wifi` tinyint(4) DEFAULT NULL,
+  `tv` tinyint(4) DEFAULT NULL,
+  `alcohol` tinyint(4) DEFAULT NULL,
   `content` text NOT NULL,
-  `rating` int(11) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `url` varchar(255) DEFAULT NULL,
+  `menu_url` varchar(255) DEFAULT NULL,
+  `sub_district` varchar(45) DEFAULT NULL,
+  `district` varchar(45) DEFAULT NULL,
+  `province` varchar(45) DEFAULT NULL,
+  `zip_code` varchar(8) DEFAULT NULL,
+  `country` varchar(32) DEFAULT NULL,
+  `date_added` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_last_modified` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id`, `review_title`, `restaurant_name`, `type`, `hrs_operation`, `tel`, `price_range`, `take_reservation`, `delivery`, `take_out`, `parking`, `wifi`, `tv`, `alcohol`, `content`, `url`, `menu_url`, `sub_district`, `district`, `province`, `zip_code`, `country`, `date_added`, `date_last_modified`) VALUES
+(1, 'สุดยอดร้านติมซำ', 'test', 'bar', NULL, '0985845442', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, 'กรุงเทพ', NULL, NULL, '2014-06-18 10:59:02', '2014-06-18 10:59:02'),
+(2, 'สุดยอดร้านซูชิ', 'test2', 'bar', NULL, '0985845442', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, 'ชุมพร', NULL, NULL, '2014-06-18 10:59:05', '2014-06-18 10:59:05');
 
 -- --------------------------------------------------------
 
@@ -157,7 +168,7 @@ INSERT INTO `temp_user` (`id`, `username`, `firstname`, `lastname`, `email`, `pa
 
 CREATE TABLE IF NOT EXISTS `user_favorite` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `restaurant_id` int(11) NOT NULL,
+  `review_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -170,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `user_favorite` (
 
 CREATE TABLE IF NOT EXISTS `user_unread_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `favorite_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `review_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

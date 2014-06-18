@@ -53,3 +53,11 @@ Route::get('share/tw', array('as' => 'restaurant/tw', 'uses' => 'ShareController
 
 //Share via facebook
 Route::get('share/fb', array('as' => 'restaurant/fb', 'uses' => 'ShareController@facebookAction')); 
+
+//Restaurant index Page
+Route::get('restaurants', function()
+{
+    $reviews = Review::all();
+
+    return View::make('review/index')->with('allReviews', $reviews);
+});
