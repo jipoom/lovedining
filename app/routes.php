@@ -61,3 +61,5 @@ Route::get('restaurants', function()
 
     return View::make('review/index')->with('allReviews', $reviews);
 });
+
+Route::get('restaurants/review/{review_id}', array('as' => 'review/detail', 'uses' => 'ReviewController@detailAction')); 
