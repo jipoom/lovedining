@@ -1,6 +1,6 @@
 <html>
     <body>
-        <h1>Laravel Quickstart OK I see</h1>
+        <h1>LoveDining</h1>
 		<div class="container">
 		@if(Auth::check())
            {{ HTML::link('/user/logout', 'logout')}}

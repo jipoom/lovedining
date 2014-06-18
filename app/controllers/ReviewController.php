@@ -7,10 +7,11 @@ class ReviewController extends BaseController{
 	public function __construct() {
 	    $this->beforeFilter('csrf', array('on'=>'post'));
 	}
-	public function detailAction($review_id) {
-		 $review = Review::find($review_id);					 
-		 echo $review->review_title;
-		 //redirect to detail.blade.php to display detail of this review
+	public function detailAction($review_id) {	
+		$review = Review::find($review_id);			 
+		$comment = Comment::where('review_id', '=', $review_id)->get();
+		//redirect to detail.blade.php to display detail of this review
+		return View::make('review/detail')->with('detail', $review)->with('comments', $comment);
     }
 	public function uploadAction() {
 		return Redirect::to( (string)$url );

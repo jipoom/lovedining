@@ -63,3 +63,5 @@ Route::get('restaurants', function()
 });
 
 Route::get('restaurants/review/{review_id}', array('as' => 'review/detail', 'uses' => 'ReviewController@detailAction')); 
+
+Route::post('restaurants/add_comment', array('as' => 'review/detail', 'uses' => 'CommentController@commentAction')); 
