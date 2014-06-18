@@ -10,13 +10,14 @@
 		<P>จังหวัด: {{ $detail->province }}</P>
 		<P>โทร: {{ $detail->tel }}</P>
 		<P>{{ $detail->content }}</P>
-	
+		-------------------------------------------------------------------------------
 		@if($comments)
 			<p>Comments:</p>
 			@foreach($comments as $comment)	
 				<p>{{User::find($comment->user_id)->username}}:{{$comment->content}}</p>
 				<p>score: {{$comment->rating}}</p>
-				<p>{{$comment->date_added}}</p>
+				<p>วันที่: {{$comment->date_added}}</p>
+				-------------------------------------------------------------------------------
 			@endforeach
 			
 		@endif
