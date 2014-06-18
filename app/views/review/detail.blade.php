@@ -37,7 +37,7 @@
            	<p>{{ Form::submit('Submit', array('class'=>'btn btn-large btn-primary btn-block'))}}</p>
            	
         @else
-        	{{HTML::link('/user/login', 'login to comment this review')}}        	 
+        	{{HTML::link('/user/login', 'login to comment this restaurant')}}        	 
         @endif
         
 	@else

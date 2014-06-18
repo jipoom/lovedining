@@ -11,7 +11,7 @@
         	{{HTML::link('/register', 'create account')}}  
         	{{HTML::link('/user/fb', 'login with facebook')}}  
         @endif
-        
+        	{{ HTML::link('/restaurants', 'ร้านอาหารทั้งหมด')}}
         @if(Session::has('message'))
             <p class="alert">{{ Session::get('message') }}</p>
         @endif
