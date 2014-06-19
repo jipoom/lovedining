@@ -27,7 +27,7 @@ class UserController extends BaseController{
     	$user = array(
             'email' => Input::get('email'),
             'password' => Input::get('password'),
-			'active' => 1
+			//'active' => 1
         );
 	  	if (Auth::attempt($user))
 		{
@@ -97,20 +97,24 @@ class UserController extends BaseController{
 		    $user->email = Input::get('email');
 		    $user->password = Hash::make(Input::get('password'));
 			$user->username = Input::get('username');
-			$user->activation_key = $key;
+			$user->tel = Input::get('tel');
+		    $user->salary = Input::get('salary');
+		    $user->sex = Input::get('sex');
+			$user->age = Input::get('age');
+			//$user->activation_key = $key;
 		    $user->save();
-			$data = array(
-						'firstname'=>Input::get('firstname'), 
-						'lastname'=>Input::get('lastname'), 
-						'link' => HTML::linkRoute('user/activate', 'Click Here to activate your account', array($key,$user->username)));
-			
-			Mail::send('user.mail.activation', $data, function($message){
-		        $message->to(Input::get('email'), Input::get('firstname').' '.Input::get('lastname'))->subject('Welcome to LoveDining');
-		    });
+			//$data = array(
+			//			'firstname'=>Input::get('firstname'), 
+			//			'lastname'=>Input::get('lastname'), 
+			//			'link' => HTML::linkRoute('user/activate', 'Click Here to activate your account', array($key,$user->username)));
+			//
+			//Mail::send('user.mail.activation', $data, function($message){
+		    //    $message->to(Input::get('email'), Input::get('firstname').' '.Input::get('lastname'))->subject('Welcome to LoveDining');
+		    //});
 					
 									
-    		return Redirect::to('user')->with('message', 'Thanks for registering! Please check your email address to activate your account');
-			
+    		//return Redirect::to('user')->with('message', 'Thanks for registering! Please check your email address to activate your account');
+			return Redirect::to('user')->with('message', 'Thanks for registering! ');
 	    } else  {
 	        // validation has failed, display error messages 
 			return Redirect::to('/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
