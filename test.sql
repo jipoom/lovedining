@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 18, 2014 at 06:37 AM
+-- Generation Time: Jun 19, 2014 at 07:05 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -40,6 +40,31 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `category`
+--
+
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `category_name`) VALUES
+(1, 'Italian'),
+(2, 'Japanese'),
+(4, 'BBQ'),
+(5, 'Brunch'),
+(6, 'American'),
+(7, 'Thai'),
+(8, 'Korean');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `comment`
 --
 
@@ -47,12 +72,19 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `review_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `title` varchar(55) NOT NULL,
   `content` text NOT NULL,
   `rating` int(11) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`id`, `review_id`, `user_id`, `content`, `rating`, `date_added`) VALUES
+(1, 1, 12, 'ทดสอบ comment 1', 5, '2014-06-18 21:16:08'),
+(2, 1, 12, 'ทดสอบ comment 2', 4, '2014-06-18 21:34:29');
 
 -- --------------------------------------------------------
 
@@ -101,8 +133,7 @@ CREATE TABLE IF NOT EXISTS `review` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `review_title` text NOT NULL,
   `restaurant_name` varchar(255) NOT NULL,
-  `type` varchar(32) NOT NULL,
-  `hrs_operation` time DEFAULT NULL,
+  `category_id` int(11) NOT NULL,
   `tel` varchar(32) NOT NULL,
   `price_range` tinyint(4) DEFAULT NULL,
   `take_reservation` tinyint(4) DEFAULT NULL,
@@ -121,7 +152,6 @@ CREATE TABLE IF NOT EXISTS `review` (
   `zip_code` varchar(8) DEFAULT NULL,
   `country` varchar(32) DEFAULT NULL,
   `date_added` datetime DEFAULT CURRENT_TIMESTAMP,
-  `date_last_modified` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
@@ -129,9 +159,9 @@ CREATE TABLE IF NOT EXISTS `review` (
 -- Dumping data for table `review`
 --
 
-INSERT INTO `review` (`id`, `review_title`, `restaurant_name`, `type`, `hrs_operation`, `tel`, `price_range`, `take_reservation`, `delivery`, `take_out`, `parking`, `wifi`, `tv`, `alcohol`, `content`, `url`, `menu_url`, `sub_district`, `district`, `province`, `zip_code`, `country`, `date_added`, `date_last_modified`) VALUES
-(1, 'สุดยอดร้านติมซำ', 'test', 'bar', NULL, '0985845442', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, 'กรุงเทพ', NULL, NULL, '2014-06-18 10:59:02', '2014-06-18 10:59:02'),
-(2, 'สุดยอดร้านซูชิ', 'test2', 'bar', NULL, '0985845442', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, 'ชุมพร', NULL, NULL, '2014-06-18 10:59:05', '2014-06-18 10:59:05');
+INSERT INTO `review` (`id`, `review_title`, `restaurant_name`, `category_id`, `tel`, `price_range`, `take_reservation`, `delivery`, `take_out`, `parking`, `wifi`, `tv`, `alcohol`, `content`, `url`, `menu_url`, `sub_district`, `district`, `province`, `zip_code`, `country`, `date_added`) VALUES
+(1, 'สุดยอดร้านติมซำ', 'test', 0, '0985845442', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ร้านที่อร่อยที่สุดในย่านสามย่าน', NULL, NULL, NULL, NULL, 'กรุงเทพ', NULL, NULL, '2014-06-18 10:59:02'),
+(2, 'สุดยอดร้านซูชิ', 'test2', 0, '0985845442', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, 'ชุมพร', NULL, NULL, '2014-06-18 10:59:05');
 
 -- --------------------------------------------------------
 

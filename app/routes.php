@@ -27,7 +27,7 @@ Route::get('user', array('as' => 'user/main', 'uses' => 'UserController@mainActi
 
 Route::get('user/login', array('as' => 'user/login', 'uses' => 'UserController@indexAction')); 
  
-Route::post('user/login', array('as' => 'user/login', 'uses' => 'UserController@loginAction'));  
+Route::post('user/login', array('before' => 'csrf','as' => 'user/login', 'uses' => 'UserController@loginAction'));  
  
 Route::get('user/profile', array('as' => 'user/profile', 'uses' => 'UserController@profileAction'));  
 
@@ -38,7 +38,7 @@ Route::get('register', function()
 }); 
 
 //Route for inserting user to DB
-Route::post('user/create', array('as' => 'user/create', 'uses' => 'UserController@createAction'));    
+Route::post('user/create', array('before' => 'csrf','as' => 'user/create', 'uses' => 'UserController@createAction'));    
 
 //Route for user activation
 Route::get('user/activate/{key}/{username}', array('as' => 'user/activate' , 'uses' => 'UserController@activateAction'));
@@ -49,10 +49,10 @@ Route::get('user/logout', array('as' => 'user/logout', 'uses' => 'UserController
 Route::get('user/fb', array('as' => 'user/fb', 'uses' => 'UserController@fbLoginACtion'));  
 
 //Share via twitter
-Route::get('share/tw', array('as' => 'restaurant/tw', 'uses' => 'ShareController@twitterAction')); 
+Route::get('share/tw', array('before' => 'auth', 'as' => 'restaurant/tw', 'uses' => 'ShareController@twitterAction')); 
 
 //Share via facebook
-Route::get('share/fb', array('as' => 'restaurant/fb', 'uses' => 'ShareController@facebookAction')); 
+Route::get('share/fb', array('before' => 'auth', 'as' => 'restaurant/fb', 'uses' => 'ShareController@facebookAction')); 
 
 //Restaurant index Page
 Route::get('restaurants', function()
@@ -61,7 +61,21 @@ Route::get('restaurants', function()
 
     return View::make('review/index')->with('allReviews', $reviews);
 });
+Route::get('restaurants', function()
+{
+    $reviews = Review::all();
+    return View::make('review/index')->with('allReviews', $reviews);
+});
 
 Route::get('restaurants/review/{review_id}', array('as' => 'review/detail', 'uses' => 'ReviewController@detailAction')); 
 
-Route::post('restaurants/add_comment', array('as' => 'review/detail', 'uses' => 'CommentController@commentAction')); 
+Route::post('restaurants/add_comment', array('before' => 'auth|csrf', 'as' => 'review/detail', 'uses' => 'CommentController@commentAction')); 
+
+//User creates new review
+Route::get('new_review', array('before' => 'auth', 'as' => 'review/new_review', 'uses' => 'ReviewController@newAction')); 
+
+
+Route::post('add_review', array('before' => 'auth|csrf', 'as' => 'review/add_comment', 'uses' => 'CommentController@commentAction')); 
+
+
+

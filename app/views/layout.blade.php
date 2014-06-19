@@ -4,6 +4,7 @@
 		<div class="container">
 		@if(Auth::check())
            {{ HTML::link('/user/logout', 'logout')}}
+           {{ HTML::link('/new_review', 'เขียนรีวีวใหม่')}}
            {{ HTML::link('/share/fb', 'share on FB!')}}
            {{ HTML::link('/share/tw', 'tweet!')}}
         @else

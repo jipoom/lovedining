@@ -16,6 +16,19 @@ class ReviewController extends BaseController{
 	public function uploadAction() {
 		return Redirect::to( (string)$url );
     }
+	
+	public function newAction() {
+		$init_cat = Category::first();
+		$array = array($init_cat->id => $init_cat->category_name);
+		$categories = Category::all();
+		foreach($categories as $temp)
+		{
+				
+			$array = array_add($array, $temp->id, $temp->category_name);
+		}
+		
+    	return View::make('review/new')->with('allCategories', $array);
+    }	
 		
 }
 ?>
