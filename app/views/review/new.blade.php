@@ -2,12 +2,13 @@
 @section("content")
 
 <meta charset="utf-8">
+
   <title>เขียนรีวิวใหม่</title>
 <h3>
 	ข้อมูลร้านอาหาร
 </h3>    
      
-	{{ Form::open(array('url'=>'add_review'));}}
+	{{ Form::open(array('url'=>'add_review', 'files' => true));}}
 	{{ Form::text('review_title', null, array('class'=>'input-block-level', 'placeholder'=>'ชื่อรีวิว'))}} </p>
  	{{ Form::text('restaurant_name', null, array('class'=>'input-block-level', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
               ประเภท: {{ Form::select('category', $allCategories); }} </p>           
@@ -23,7 +24,7 @@
     {{ Form::text('province', null, array('placeholder'=>'จังหวัด')) }} </p>       
           
 <h3>
-	เขียนรีวิวที้นี่....
+	เขียนรีวิวที่นี่....
 </h3>    
     {{ Form::textarea('content')}} </p> 
     {{ Form::submit('Submit', array('class'=>'btn btn-large btn-primary btn-block'))}}
