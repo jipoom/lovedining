@@ -77,5 +77,10 @@ Route::get('new_review', array('before' => 'auth', 'as' => 'review/new_review', 
 
 Route::post('add_review', array('before' => 'auth|csrf', 'as' => 'review/add_comment', 'uses' => 'CommentController@commentAction')); 
 
+Route::get('add_review/upload', function()
+{
+    return View::make('picture/upload');
+});
+
 
 

@@ -26,6 +26,12 @@
 <h3>
 	เขียนรีวิวที่นี่....
 </h3>    
-    {{ Form::textarea('content')}} </p> 
+    {{ Form::textarea('content')}} </p>
+    <button type='button' onclick="myFunction()">แทรกรูปภาพ</button></p>
     {{ Form::submit('Submit', array('class'=>'btn btn-large btn-primary btn-block'))}}
+    <script>
+	function myFunction() {
+	    var myWindow = window.open("add_review/upload", "", "width=200, height=100");
+	}
+	</script>
 @stop
