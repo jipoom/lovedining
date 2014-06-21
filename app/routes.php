@@ -82,5 +82,6 @@ Route::get('add_review/upload', function()
     return View::make('picture/upload');
 });
 
+Route::post('upload',array('as'=>'upload', 'before'=>'auth','uses'=>'UploadController@index'));
 
 
