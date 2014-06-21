@@ -82,6 +82,17 @@ Route::get('add_review/upload', function()
     return View::make('picture/upload');
 });
 
-Route::post('upload',array('as'=>'upload', 'before'=>'auth','uses'=>'UploadController@index'));
+Route::post('upload',array('as'=>'upload', 'before'=>'auth','uses'=>'UploadController@uploadAction'));
+
+/*Route::post('upload', function()
+{
+    if (Input::hasFile('file')) {
+	        $file            = Input::file('file');
+	        $destinationPath = public_path().'/uploads/';
+	        $filename        = str_random(6) . '_' . $file->getClientOriginalName();
+	        $uploadSuccess   = $file->move($destinationPath, $filename);
+	}
+});*/
+
 
 

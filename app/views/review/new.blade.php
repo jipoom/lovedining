@@ -31,7 +31,7 @@
     {{ Form::submit('Submit', array('class'=>'btn btn-large btn-primary btn-block'))}}
     <script>
 	function myFunction() {
-	    var myWindow = window.open("add_review/upload", "", "width=200, height=100");
+	    var myWindow = window.open("add_review/upload", "", "width=600, height=600");
 	}
 	</script>
 @stop
