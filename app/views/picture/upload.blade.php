@@ -1,6 +1,6 @@
 {{HTML::script('/js/dropzone.js')}}
-<form action="/file-upload"
+<form action="upload"
       class="dropzone"
-      id="my-awesome-dropzone">
-    <input name="file" type="file" multiple />
+      id="image-upload">
 </form>
+<script
