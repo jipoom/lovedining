@@ -46,7 +46,8 @@ $destinationPath = 'uploads';
 // If the uploads fail due to file system, you can try doing public_path().'/uploads' 
 $filename = str_random(12);
 //$filename = $file->getClientOriginalName();
-//$extension =$file->getClientOriginalExtension(); 
+$extension =$file->getClientOriginalExtension(); 
+$filename = $filename.'.'.$extension;
 $upload_success = Input::file('file')->move($destinationPath, $filename);
  
 if( $upload_success ) {
